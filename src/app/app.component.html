@@ -1,11 +1,11 @@
 <main>
-  <header><img src="assets/logo.svg" alt="logo">{{ title }}</header>
+  <header><img src="assets/images/logo.svg" alt="logo">{{ title }}</header>
   <section>
     <app-housing-list [locationList]="housingLocationList" (locationSelectedEvent)="updateSelectedLocation($event)">
     </app-housing-list>
     <article>
       <ng-container *ngIf="selectedLocation !== undefined">
-        <img [src]="selectedLocation.photo" alt="housing photo">
+        <img [src]="'assets/images/' + selectedLocation.photo" alt="housing photo">
         <p>{{selectedLocation.name}}</p>
         <p>{{selectedLocation.city}}, {{selectedLocation.state}}</p>
         <p>Available Units: {{selectedLocation.availableUnits}}</p>
