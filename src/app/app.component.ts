@@ -24,10 +24,11 @@ export class AppComponent {
     this.selectedLocation = location;
   }
 
-  searchLocations(searchText: string) {
+  searchLocations(searchText: string): void {
     this.searchResultSub = this.housingDataService.searchLocations(searchText).subscribe(
       result =>{
         this.searchResult = result;
+        this.selectedLocation = undefined;
         this.searchResultSub?.unsubscribe();
       }
     )
