@@ -1,11 +1,14 @@
 <main>
   <header><img src="assets/images/logo.svg" alt="logo">{{ title }}</header>
+  <label for="location-search">Search for a new place</label>
+  <input id="location-search" #search placeholder="Ex: Chicago"><button
+  (click)="searchLocations(search.value)">Search</button>
   <section>
-    <app-housing-list [locationList]="housingLocationList" (locationSelectedEvent)="updateSelectedLocation($event)">
+    <app-housing-list [locationList]="searchResult" (locationSelectedEvent)="updateSelectedLocation($event)">
     </app-housing-list>
     <article>
       <ng-container *ngIf="selectedLocation !== undefined">
-        <img [src]="'assets/images/' + selectedLocation.photo" alt="housing photo">
+        <img [src]="HousingDataService.imageFolder + selectedLocation.photo" alt="housing photo">
         <p>{{selectedLocation.name}}</p>
         <p>{{selectedLocation.city}}, {{selectedLocation.state}}</p>
         <p>Available Units: {{selectedLocation.availableUnits}}</p>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {HousingLocation} from "./housing-location";
+import {HousingDataService} from "./housing-data.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -10,39 +12,26 @@ export class AppComponent {
 
   title: string = 'FairHouse';
 
-  housingLocationList: HousingLocation[] = [
-    {
-      name: "Acme Fresh Start Housing",
-      city: "Chicago",
-      state: "IL",
-      photo: "housing-1.jpg",
-      availableUnits: 4,
-      wifi: true,
-      laundry: true,
-    },
-    {
-      name: "A113 Transitional Housing",
-      city: "Santa Monica",
-      state: "CA",
-      photo: "housing-2.jpg",
-      availableUnits: 0,
-      wifi: false,
-      laundry: true,
-    },
-    {
-      name: "Warm Beds Housing Support",
-      city: "Juneau",
-      state: "AK",
-      photo: "housing-3.jpg",
-      availableUnits: 1,
-      wifi: false,
-      laundry: false,
-    }
-  ];
+  searchResult: HousingLocation[] = [];
+  private searchResultSub: Subscription | undefined;
 
-  selectedLocation: HousingLocation | undefined;// = this.housingLocationList[0];
+  selectedLocation: HousingLocation | undefined;
+
+  constructor(private housingDataService: HousingDataService) {
+  }
 
   updateSelectedLocation(location: HousingLocation) {
     this.selectedLocation = location;
   }
+
+  searchLocations(searchText: string) {
+    this.searchResultSub = this.housingDataService.searchLocations(searchText).subscribe(
+      result =>{
+        this.searchResult = result;
+        this.searchResultSub?.unsubscribe();
+      }
+    )
+  }
+
+  protected readonly HousingDataService = HousingDataService;
 }
