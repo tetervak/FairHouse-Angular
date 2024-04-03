@@ -10,8 +10,6 @@ import {Subscription} from "rxjs";
 })
 export class AppComponent {
 
-  title: string = 'FairHouse';
-
   searchResult: HousingLocation[] = [];
   private searchResultSub: Subscription | undefined;
 

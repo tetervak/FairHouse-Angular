@@ -1,20 +1,8 @@
+<app-header></app-header>
 <main>
-  <header><img src="assets/images/logo.svg" alt="logo">{{ title }}</header>
-  <label for="location-search">Search for a new place</label>
-  <input id="location-search" #search placeholder="Ex: Chicago"><button
-  (click)="searchLocations(search.value)">Search</button>
+  <app-search-box (searchEvent)="searchLocations($event)"></app-search-box>
   <section>
-    <app-housing-list [locationList]="searchResult" (locationSelectedEvent)="updateSelectedLocation($event)">
-    </app-housing-list>
-    <article>
-      <ng-container *ngIf="selectedLocation !== undefined">
-        <img [src]="HousingDataService.imageFolder + selectedLocation.photo" alt="housing photo">
-        <p>{{selectedLocation.name}}</p>
-        <p>{{selectedLocation.city}}, {{selectedLocation.state}}</p>
-        <p>Available Units: {{selectedLocation.availableUnits}}</p>
-        <p>{{selectedLocation.laundry ? "Has laundry" : "Does Not have laundry"}}</p>
-        <p>{{selectedLocation.wifi ? "Has wifi" : "Does Not have wifi"}}</p>
-      </ng-container>
-    </article>
+    <app-housing-list [locationList]="searchResult" (locationSelectedEvent)="updateSelectedLocation($event)"></app-housing-list>
+    <app-housing-details [housingLocation]="selectedLocation"></app-housing-details>
   </section>
 </main>

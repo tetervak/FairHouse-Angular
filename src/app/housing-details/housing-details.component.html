@@ -1,0 +1,10 @@
+<article>
+  <ng-container *ngIf="housingLocation !== undefined">
+    <img [src]="HousingDataService.imageFolder + housingLocation.photo" alt="housing photo">
+    <p>{{housingLocation.name}}</p>
+    <p>{{housingLocation.city}}, {{housingLocation.state}}</p>
+    <p>Available Units: {{housingLocation.availableUnits}}</p>
+    <p>{{housingLocation.laundry ? "Has laundry" : "Does Not have laundry"}}</p>
+    <p>{{housingLocation.wifi ? "Has wifi" : "Does Not have wifi"}}</p>
+  </ng-container>
+</article>
